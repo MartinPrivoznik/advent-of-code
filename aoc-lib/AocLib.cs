@@ -5,16 +5,16 @@ namespace aoc_lib;
 
 public class AocLib(string sessionKey)
 {
-    public async Task<InputData<T>> DownloadInputData<T>(int year, int day)
+    public async Task<InputData<T>> DownloadInputData<T>(int year, int day, bool readDataAsSingleString = false)
     {
         if(TryGetLocalData(year, day, out var localData))
-            return new InputData<T>(localData);
+            return new InputData<T>(localData, readDataAsSingleString);
         
         var endpoint = BuildDataEndpoint(year, day);
         var data = await AocHttpClient.GetAsync(endpoint, sessionKey);
         await SaveInputData(year, day, data);
         
-        return new InputData<T>(data);
+        return new InputData<T>(data, readDataAsSingleString);
     }
     
     public static bool TryGetStoredSolution(int year, int day, int task, out string solution)

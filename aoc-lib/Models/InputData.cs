@@ -2,13 +2,21 @@ namespace aoc_lib.Models;
 
 public class InputData<T>
 {
-    public InputData(string dataSet)
+    public InputData(string dataSet, bool onlyStoreRaw = false)
     {
-        Rows = dataSet.Split("\n")
-            .Where(l => !string.IsNullOrEmpty(l))
-            .Select(l => new InputLine<T>(l))
-            .ToList();
+        RawData = dataSet;
+
+        if (!onlyStoreRaw)
+        {
+            Rows = dataSet.Split("\n")
+                .Where(l => !string.IsNullOrEmpty(l))
+                .Select(l => new InputLine<T>(l))
+                .ToList();
+        }
+        else Rows = [];
     }
+    
+    public string RawData { get; set; }
 
     public List<InputLine<T>> Rows { get; set; }
     

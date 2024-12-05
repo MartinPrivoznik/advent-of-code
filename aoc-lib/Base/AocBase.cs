@@ -2,7 +2,7 @@ using aoc_lib.Models;
 
 namespace aoc_lib.Base;
 
-public abstract class AocBase<T>(int year, int day, string sessionKey) : IAocBase
+public abstract class AocBase<T>(int year, int day, string sessionKey, bool readDataAsSingleString = false) : IAocBase
 {
     protected InputData<T> Input = default!;
     
@@ -10,7 +10,7 @@ public abstract class AocBase<T>(int year, int day, string sessionKey) : IAocBas
 
     public async Task LoadInput()
     {
-        Input = await _lib.DownloadInputData<T>(year, day);
+        Input = await _lib.DownloadInputData<T>(year, day, readDataAsSingleString);
     }
 
     public abstract object SolveTask1();
