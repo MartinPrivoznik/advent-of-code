@@ -16,6 +16,33 @@ public class AocLib(string sessionKey)
         
         return new InputData<T>(data);
     }
+    
+    public bool TryGetStoredSolution(int year, int day, int task, out string solution)
+    {
+        var path = $"./solutions/{year}/day{day}-{task}.txt";
+
+        if (!File.Exists(path))
+        {
+            solution = string.Empty;
+            return false;
+        }
+
+        solution = File.ReadAllText(path);
+        return true;
+    }
+    
+    public void SaveSolution(int year, int day, int task, string solution)
+    {
+        var path = $"./solutions/{year}/day{day}-{task}.txt";
+        var directory = Path.GetDirectoryName(path);
+
+        if (!Directory.Exists(directory))
+        {
+            if (directory != null) Directory.CreateDirectory(directory);
+        }
+        
+        File.WriteAllText(path, solution);
+    }
 
     private static string BuildDataEndpoint(int year, int day)
     {

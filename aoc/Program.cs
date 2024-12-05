@@ -4,5 +4,9 @@ const string sessionKey = "53616c7465645f5f7dad2f6361259592b2dabe4a9bc4019b28b52
 
 var day1 = new Day1(sessionKey);
 await day1.LoadInput();
-Console.WriteLine("Day 1 - 1: " + day1.SolveTask1());
-Console.WriteLine("Day 1 - 2: " + day1.SolveTask2());
+var day1Solution = day1.Solve();
+Console.WriteLine("Day 1 - 1: " + day1Solution.Solution1);
+Console.WriteLine("Day 1 - 2: " + day1Solution.Solution2);
+
+var day2 = new Day2(sessionKey);
+await day2.LoadInput();
