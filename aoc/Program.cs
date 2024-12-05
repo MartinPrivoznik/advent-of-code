@@ -1,6 +1,11 @@
 ﻿using aoc._2024;
+using Microsoft.Extensions.Configuration;
 
-const string sessionKey = "53616c7465645f5f7dad2f6361259592b2dabe4a9bc4019b28b52402aa79fe2d67a321490f5f6193bbe16c5ed96077bba3c28610cfc110a2e295bd80aaa9bc6e";
+var configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .Build();
+
+var sessionKey = configuration["SessionKey"] ?? "";
 
 var day1 = new Day1(sessionKey);
 await day1.LoadInput();
@@ -10,4 +15,7 @@ Console.WriteLine("Day 1 - 2: " + day1Solution.Solution2);
 
 var day2 = new Day2(sessionKey);
 await day2.LoadInput();
-Console.WriteLine("Day 2 - 1: " + day2.SolveTask1());
+var day2Solution = day2.Solve();
+Console.WriteLine("Day 2 - 1: " + day2Solution.Solution1);
+Console.WriteLine("Day 2 - 2: " + day2Solution.Solution2);
+

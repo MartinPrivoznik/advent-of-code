@@ -23,6 +23,25 @@ public class Day2(string sessionKey) : AocBase<int>(2024, 2, sessionKey)
 
     public override object SolveTask2()
     {
-        throw new NotImplementedException();
+        var validRows = 0;
+
+        foreach (var row in Input.Rows)
+        {
+            for(var i = 0; i < row.Values.Count; i++)
+            {
+                var reducedList = row.Values.ToList();
+                reducedList.RemoveAt(i);
+
+                var isSorted = reducedList.IsSorted();
+                var neighborsAreCloseEnough = reducedList.NeighborsDifferByMaxOf(3);
+
+                if (!isSorted || !neighborsAreCloseEnough) continue;
+                
+                validRows++;
+                break;
+            }
+        }
+
+        return validRows;
     }
 }

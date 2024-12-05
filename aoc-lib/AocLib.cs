@@ -17,7 +17,7 @@ public class AocLib(string sessionKey)
         return new InputData<T>(data);
     }
     
-    public bool TryGetStoredSolution(int year, int day, int task, out string solution)
+    public static bool TryGetStoredSolution(int year, int day, int task, out string solution)
     {
         var path = $"./solutions/{year}/day{day}-{task}.txt";
 
@@ -31,7 +31,7 @@ public class AocLib(string sessionKey)
         return true;
     }
     
-    public void SaveSolution(int year, int day, int task, string solution)
+    public static void SaveSolution(int year, int day, int task, string solution)
     {
         var path = $"./solutions/{year}/day{day}-{task}.txt";
         var directory = Path.GetDirectoryName(path);
