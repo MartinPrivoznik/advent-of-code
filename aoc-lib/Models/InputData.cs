@@ -4,20 +4,16 @@ public class InputData<T>
 {
     public InputData(string dataSet)
     {
-        Lines = dataSet.Split("\n")
+        Rows = dataSet.Split("\n")
             .Where(l => !string.IsNullOrEmpty(l))
             .Select(l => new InputLine<T>(l))
             .ToList();
     }
 
-    private List<InputLine<T>> Lines { get; set; }
-
-    public List<InputValue<T>> Row(int index)
+    public List<InputLine<T>> Rows { get; set; }
+    
+    public List<T> Column(int index)
     {
-        return Lines[index].Values;
-    }
-    public List<InputValue<T>> Column(int index)
-    {
-        return Lines.Select(l => l.Values[index]).ToList();
+        return Rows.Select(l => l.Values[index]).ToList();
     }
 }
