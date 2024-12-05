@@ -4,7 +4,7 @@ namespace aoc_lib.Base;
 
 public abstract class AocBase<T>(int year, int day, string sessionKey) : IAocBase
 {
-    protected InputData<T>? Input;
+    protected InputData<T> Input = default!;
     
     private readonly AocLib _lib = new(sessionKey);
 

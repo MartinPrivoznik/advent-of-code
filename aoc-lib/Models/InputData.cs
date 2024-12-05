@@ -9,6 +9,15 @@ public class InputData<T>
             .Select(l => new InputLine<T>(l))
             .ToList();
     }
-    
-    public List<InputLine<T>> Lines { get; set; }
+
+    private List<InputLine<T>> Lines { get; set; }
+
+    public List<InputValue<T>> Row(int index)
+    {
+        return Lines[index].Values;
+    }
+    public List<InputValue<T>> Column(int index)
+    {
+        return Lines.Select(l => l.Values[index]).ToList();
+    }
 }
