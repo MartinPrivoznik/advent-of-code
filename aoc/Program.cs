@@ -24,3 +24,7 @@ await day3.LoadInput();
 var day3Solution = day3.Solve();
 Console.WriteLine("Day 3 - 1: " + day3Solution.Solution1);
 Console.WriteLine("Day 3 - 2: " + day3Solution.Solution2);
+
+var day4 = new Day4(sessionKey);
+await day4.LoadInput();
+Console.WriteLine("Day 4 - 1: " + day4.SolveTask1());

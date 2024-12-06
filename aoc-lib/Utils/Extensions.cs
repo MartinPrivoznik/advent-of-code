@@ -25,6 +25,14 @@ public static class Extensions
         }
         return true;
     }
+    
+    public static List<List<char>> As2DList(this string input, string lineSeparator = "\n")
+    {
+        return input.Split(lineSeparator)
+            .Where(l => !string.IsNullOrEmpty(l))
+            .Select(l => l.ToCharArray().ToList())
+            .ToList();
+    }
 
     private static bool IsSortedAscending<T>(this List<T> list) where T : IComparable<T>
     {
