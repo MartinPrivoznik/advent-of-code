@@ -30,3 +30,8 @@ await day4.LoadInput();
 var day4Solution = day4.Solve();
 Console.WriteLine("Day 4 - 1: " + day4Solution.Solution1);
 Console.WriteLine("Day 4 - 2: " + day4Solution.Solution2);
+
+var day5 = new Day5(sessionKey);
+await day5.LoadInput();
+Console.WriteLine("Day 5 - 1: " + day5.SolveTask1());
+// Console.WriteLine("Day 5 - 2: " + day5.SolveTask2());

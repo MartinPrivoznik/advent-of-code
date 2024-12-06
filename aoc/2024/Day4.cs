@@ -6,7 +6,7 @@ namespace aoc._2024;
 
 public class Day4(string sessionKey) : AocBase<string>(2024, 4, sessionKey)
 {
-    private bool IsInBounds(int x, int y, int width, int height)
+    private static bool IsInBounds(int x, int y, int width, int height)
     {
         return x >= 0 && x < width && y >= 0 && y < height;
     }
