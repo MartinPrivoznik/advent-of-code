@@ -6,20 +6,6 @@ namespace aoc._2024;
 
 public class Day4(string sessionKey) : AocBase<string>(2024, 4, sessionKey)
 {
-    private const string FINAL_WORD = "XMAS";
-
-    private readonly (int, int)[] _directions =
-    [
-        (1, 0),
-        (-1, 0),
-        (0, 1), 
-        (0, -1), 
-        (1, 1),
-        (1, -1),
-        (-1, 1),
-        (-1, -1)
-    ];
-    
     private bool IsInBounds(int x, int y, int width, int height)
     {
         return x >= 0 && x < width && y >= 0 && y < height;
@@ -27,6 +13,20 @@ public class Day4(string sessionKey) : AocBase<string>(2024, 4, sessionKey)
     
     public override object SolveTask1()
     {
+      const string finalWord = "XMAS";
+
+      (int, int)[] directions =
+        [
+            (1, 0),
+            (-1, 0),
+            (0, 1), 
+            (0, -1), 
+            (1, 1),
+            (1, -1),
+            (-1, 1),
+            (-1, -1)
+        ];
+    
         var matrix = Input.RawData.As2DList();
         
         var width = matrix[0].Count;
@@ -43,14 +43,15 @@ public class Day4(string sessionKey) : AocBase<string>(2024, 4, sessionKey)
                 var ch = row[j];
                 
                 // Skip if the first letter of the word does not match
-                if (ch != FINAL_WORD[0]) continue;
+                if (ch != finalWord[0]) continue;
 
                 // Validate all directions
-                foreach (var (dx, dy) in _directions)
+                foreach (var (dx, dy) in directions)
                 {
                     var wordMatches = false;
                     
-                    for (var k = 1; k < FINAL_WORD.Length; k++)
+                    // Check whole word
+                    for (var k = 1; k < finalWord.Length; k++)
                     {
                         var x = j + k * dx;
                         var y = i + k * dy;
@@ -58,10 +59,10 @@ public class Day4(string sessionKey) : AocBase<string>(2024, 4, sessionKey)
                         if (!IsInBounds(x, y, width, height))
                             break;
 
-                        if (matrix[y][x] != FINAL_WORD[k])
+                        if (matrix[y][x] != finalWord[k])
                             break;
 
-                        if (k == FINAL_WORD.Length - 1)
+                        if (k == finalWord.Length - 1)
                             wordMatches = true;
                     }
                     
@@ -76,6 +77,31 @@ public class Day4(string sessionKey) : AocBase<string>(2024, 4, sessionKey)
 
     public override object SolveTask2()
     {
-        throw new NotImplementedException();
+        var matrix = Input.RawData.As2DList();
+
+        var xmasCount = 0;
+
+        // skip first and last row
+        for (var i = 1; i < matrix.Count - 1; i++)
+        {
+            var row = matrix[i];
+
+            // skip first and last column
+            for (var j = 1; j < row.Count - 1; j++)
+            {
+                if (matrix[i][j] != 'A') continue;
+                
+                var word1 = new string(new[] {matrix[i - 1][j - 1], matrix[i][j], matrix[i + 1][j + 1]});
+                var word2 = new string(new[] {matrix[i - 1][j + 1], matrix[i][j], matrix[i + 1][j - 1]});
+                
+                if (word1 is "MAS" or "SAM" &&
+                    word2 is "MAS" or "SAM")
+                {
+                    xmasCount++;
+                }
+            }
+        }
+
+        return xmasCount;
     }
 }
